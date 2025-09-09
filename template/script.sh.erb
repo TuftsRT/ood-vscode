@@ -9,6 +9,7 @@ module purge
 module load <%= context.version %>
 echo "INFO: Modules loaded:"
 module list 2>&1
+export SINGULARITY_BIND="/cluster/tufts${SINGULARITY_BIND:+,$SINGULARITY_BIND}"
 
 # Verify that the code-server command is now available
 if ! command -v code-server &> /dev/null; then
