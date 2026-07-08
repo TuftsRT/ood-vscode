@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Security
+- Enable code-server password authentication. `script.sh.erb` now launches with
+  `--auth password` instead of `--auth none`, and `before.sh.erb` exports the
+  `PASSWORD` env var that code-server reads. This matches the existing
+  `view.html.erb` auto-login flow, which was already generating and posting a
+  password. The connect experience is unchanged for users.
+
 ## [0.7.0] - 2023-03-24
 
 ### Added

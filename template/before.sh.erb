@@ -7,5 +7,8 @@ export port=$(find_port ${host})
 # Export compute node the script is running on
 export host="${host}"
 
-# Generate SHA1 encrypted password (requires OpenSSL installed)
+# Generate a random password. `password` (lowercase) is consumed by
+# view.html.erb for the auto-login form/cookie; `PASSWORD` (uppercase) is the
+# variable code-server reads when launched with `--auth password`.
 export password="$(create_passwd 16)"
+export PASSWORD="${password}"

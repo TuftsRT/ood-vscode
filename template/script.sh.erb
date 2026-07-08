@@ -35,7 +35,7 @@ echo "  - Compute Node: $(hostname)"
 # --bind-addr: Binds to the address and port provided by Open OnDemand.
 # --user-data-dir / --extensions-dir: Sets paths for persistent data.
 code-server \
-  --auth none \
+  --auth password \
   --bind-addr "0.0.0.0:${port}" \
   --user-data-dir "${DATA_DIR}" \
   --extensions-dir "${EXTENSIONS_DIR}" \
