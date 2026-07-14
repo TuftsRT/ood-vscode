@@ -1,4 +1,9 @@
 ---
+<%
+@partition_filter = :all
+_partial_path = '/etc/ood/config/apps/dashboard/batch_connect/partials/resource_discovery.erb'
+_resource_result = ERB.new(File.read(_partial_path)).result(binding)
+%>
 cluster: "pax"
 form:
   - partition
@@ -7,12 +12,22 @@ form:
   - gpu_type
   - bc_num_hours
   - version
+  - ta_qos
 
 attributes:
-<%= File.read("/etc/ood/config/apps/dashboard/batch_connect/partials/all_partition.yml").indent(2) %>
-<%= File.read("/etc/ood/config/apps/dashboard/batch_connect/partials/gpu_type.yml").indent(2) %>
-<%= File.read("/etc/ood/config/apps/dashboard/batch_connect/partials/num_cores_generic.yml").indent(2) %>
-<%= File.read("/etc/ood/config/apps/dashboard/batch_connect/partials/num_memory_generic.yml").indent(2) %>
+  ta_qos:
+    widget: check_box
+    label: "Request priority start"
+    cacheable: false
+    help: "Limited to 1 running job at a time. (--qos=interactive)"
+    value: "normal"
+    checked_value: "interactive"
+    unchecked_value: "normal"
+<%= generate_partition_field.indent(2) %>
+<%= generate_gpu_type_field.indent(2) %>
+<%= generate_num_cores_field.indent(2) %>
+<%= generate_num_memory_field.indent(2) %>
+<%= generate_num_hours_field.indent(2) %>
 
   version:
     widget: select
@@ -20,10 +35,5 @@ attributes:
     options:
       - [ "4.126.0", "vscode-server/4.126.0"]
       - [ "4.105.1", "vscode-server/4.105.1"]
-
-  bc_num_hours:
-    max: 60
-    help: |
-      Your job will be automatically killed after this amount of time
 
 
